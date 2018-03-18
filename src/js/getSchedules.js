@@ -1,8 +1,3 @@
-import {createNotification} from './notification.js'
-import css from '../css/app.scss'
-
-var dev = process.env.NODE_ENV == "development"
-
 var get = function(url) {
   return new Promise(function(resolve, reject){
     var xhr = new XMLHttpRequest()
@@ -48,30 +43,6 @@ var getUris = async function (sens) {
 
 var getSchedules = async function (sens) {
   let response = await getUris(sens)
-  response.rer.forEach(async function (url) {
-    let schedule = await get(url)
-    console.log(schedule)
-  })
-  response.bus.forEach(async function (url) {
-    let schedule = await get(url)
-    console.log(schedule)
-  })
-  response.metro.forEach(async function (url) {
-    let schedule = await get(url)
-    console.log(schedule)
-  })
-  createNotification('success', 'Les requetes ont été effectuées avec succès')
-  return response
 }
 
-getSchedules('0').then(function (results) {
-  console.log(results)
-})
-
-document.querySelectorAll('button').forEach(function (button) {
-  button.addEventListener('click', function (e) {
-    e.preventDefault()
-    console.log('Bonjour les enfants')
-    createNotification(this.getAttribute('data-notification-type'), this.getAttribute('data-notification-text') == undefined ? this.innerHTML.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : this.getAttribute('data-notification-text'))
-  })
-})
+module.exports = getSchedules

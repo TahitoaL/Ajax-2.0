@@ -31,7 +31,8 @@ let config = {
   watch: true,
   output: {
     path: path.resolve('./dist'),
-    filename: '[name].js'
+    filename: '[name].[chunkhash:8].js',
+    publicPath: '/dist/'
   },
   devtool: "cheap-module-eval-source-map",
   module: {
@@ -39,7 +40,7 @@ let config = {
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        use: ['babel-loader']
+        use: []
       },
       {
         test: /\.css$/,

@@ -1,3 +1,20 @@
+var get = function(url) {
+  return new Promise(function(resolve, reject){
+    var xhr = new XMLHttpRequest()
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(xhr.responseText)
+        } else {
+          reject(xhr)
+        }
+      }
+    }
+    xhr.open('GET', url, true)
+    xhr.send()
+  })
+}
 
 var getRequest = async function () {
   var response = await get('https://toal.000webhostapp.com/transports/contents/horaires.php')
