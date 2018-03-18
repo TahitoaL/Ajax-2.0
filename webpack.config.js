@@ -1,7 +1,7 @@
 const path = require('path')
 const extractTextPlugin = require('extract-text-webpack-plugin')
 const manifestPulgin = require('webpack-manifest-plugin')
-const dev = process.env.NODE_ENV === "development"
+let dev = process.env.NODE_ENV === "development"
 
 let cssLoaders = [
   {
@@ -31,7 +31,7 @@ let config = {
   watch: true,
   output: {
     path: path.resolve('./dist'),
-    filename: '[name].[chunkhash:8].js',
+    filename: dev ? '[name].js' : '[name].[chunkhash:8].js',
     publicPath: '/dist/'
   },
   devtool: "cheap-module-eval-source-map",

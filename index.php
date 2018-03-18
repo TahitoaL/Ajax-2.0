@@ -20,7 +20,7 @@
  				</ul>
  			</nav>
  		</header>
- 		<div class="container">
+ 		<div class="container" id="container">
       <button class="test" data-notification-type="success">Valider</button><br>
       <button class="test" data-notification-type="error">Refuser</button><br>
       <button class="test" data-notification-type="info" data-notification-text="Informations diverses">Informer</button><br>
