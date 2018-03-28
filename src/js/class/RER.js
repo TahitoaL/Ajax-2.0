@@ -35,6 +35,14 @@ let getTimes = async function (url) {
   return res
 }
 
+let compare = function (newContent, oldContent) {
+  if (newContent.code != oldContent.code) {
+    console.log('Changement détecté')
+  } else {
+    console.log('Aucun changement détecté')
+  }
+}
+
 
 export default class RER {
 
@@ -45,6 +53,7 @@ export default class RER {
     this.content = []
     this.created = false
     this.first = 0
+    self = this
   }
 
   message (message) {
@@ -71,9 +80,8 @@ export default class RER {
     var tbody = newElement('tbody', ['a'], '', horaire)
     this.tbody = tbody
     for (var i = 0; i < 5; i++) {
-      this.content.push(times.result.schedules[i])
+      this.push(times.result.schedules[i])
     }
-    console.log(this.content)
     this.mission()
     this.refresh()
     this.created = true
@@ -96,20 +104,14 @@ export default class RER {
     newElement('td', ['message'], this.message(schedule.message), tr)
   }
 
-  compare (newContent) {
-    if (newContent[0].code != this.content.code[this.first]) {
-      console.log('Changement détecté')
-    } else {
-      console.log('Aucun changement détecté')
-    }
-  }
-
   refresh () {
     if (this.url.length > 0) {
-      // console.log(this.url)
       getTimes(this.url).then(function (result) {
+        let response = JSON.parse(result)
+        console.log(response.result.schedules[0])
+        compare(response.result.schedules[0], self.content[self.first])
         console.log('OKKKK')
-        console.log(result)
+        // console.log(result)
       })
       // this.push({code: 'UBER', destination: 'Courbevoie', message: '06:45 Voie C'})
       // this.mission()
