@@ -34,6 +34,9 @@ let config = {
     filename: dev ? '[name].js' : '[name].[chunkhash:8].js',
     publicPath: '/dist/'
   },
+  resolve: {
+    extensions: ['.js']
+  },
   devtool: "cheap-module-eval-source-map",
   module: {
     rules: [

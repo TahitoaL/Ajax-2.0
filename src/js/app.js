@@ -1,13 +1,15 @@
 import {createNotification} from './notification.js'
-import {RER} from './RER.js'
+import RER from './class/RER'
 import css from '../css/app.scss'
 
-var dev = process.env.NODE_ENV == "development"
 
-// var RERA = new RER (RERA)
-// console.log(RERA)
-//
-// console.log(RERA)
+var RerA = new RER ('RerA')
+console.log(RerA)
+
+// console.log(RerA.message('17:04 Voie A'))
+
+// console.log(RerA.create('{ "result": { "schedules": [ { "code": "NEMO", "message": "21:47 Voie 1", "destination": "Boissy-Saint-Leger" }, { "code": "QURE", "message": "21:53 Voie 1", "destination": "Marne-la-Vallee Chessy" }, { "code": "NEMO", "message": "22:00 Voie 1", "destination": "Boissy-Saint-Leger" }, { "code": "OPUS", "message": "22:08 Voie 1", "destination": "Torcy" }, { "code": "NEMO", "message": "22:16 Voie 1", "destination": "Boissy-Saint-Leger" }, { "code": "QURE", "message": "22:23 Voie 1", "destination": "Marne-la-Vallee Chessy" } ] }, "_metadata": { "call": "GET /schedules/rers/A/la+defense+%28grande+arche%29/R", "date": "2018-03-25T21:46:21+02:00", "version": 3 } }'))
+
 
 var get = function(url) {
   return new Promise(function(resolve, reject){
@@ -54,9 +56,12 @@ var getUris = async function (sens) {
 
 var getSchedules = async function (sens) {
   let response = await getUris(sens)
+  RerA.url = response.rer
   response.rer.forEach(async function (url) {
     let schedule = await get(url)
-    RER.create(schedule)
+    RerA.create(schedule)
+    createNotification('success', 'Les requetes ont été effectuées avec succès')
+
   })
   // response.bus.forEach(async function (url) {
   //   let schedule = await get(url)
@@ -66,13 +71,17 @@ var getSchedules = async function (sens) {
   //   let schedule = await get(url)
   //   console.log(schedule)
   // })
-  console.log(RER)
+  console.log('RerA')
   return response
 }
 
 getSchedules('0').then(function (results) {
-  console.log(results)
-  createNotification('success', 'Les requetes ont été effectuées avec succès')
+  console.log('results')
+  setInterval(function () {
+    if (RerA.created) {
+      RerA.refresh()
+    }
+  }, 10000)
 })
 
 document.querySelectorAll('button').forEach(function (button) {
