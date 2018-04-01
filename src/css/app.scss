@@ -446,18 +446,17 @@ body {
 }
 
 /*
-* SLIDER
+* ANIM
 */
 
-.slide-top {
-  animation: slideTop 2;
+.blink {
+  animation: blink 2s infinite;
 }
 
-@keyframes slideTop {
-  0% {
-    transform: translateY() (0);
-  }
-  to {
-    transform: translateY(-56.6px);
-  }
+@keyframes blink {
+  0% { opacity: 0;}
+  40% {opacity: 0;}
+  50% {opacity: 1;}
+  90% {opacity: 1;}
+  100% {opacity: 0;}
 }

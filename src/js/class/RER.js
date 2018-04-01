@@ -81,6 +81,7 @@ export default class RER {
     this.created = false
     this.first = 0
     this.lastRow = 0
+    this.lastRequest = []
     self = this
   }
 
@@ -210,12 +211,16 @@ export default class RER {
     if (this.url.length > 0) {
       getTimes(this.url).then(function (result) {
         let response = JSON.parse(result)
+        self.lastRequest = response.result.schedules
         let hasChanged = compare(response.result.schedules[0], self.content[self.first])
         if (hasChanged) {
           self.newLine()
           self.fill(self.lastRow - 1, response.result.schedules[4].code, response.result.schedules[4].message)
-          self.first++
+          // self.first++
+          console.log(self.content)
           self.content.shift()
+          // self.content.push(self.lastRequest[5])
+          console.log(self.content)
         }
         self.update(response.result.schedules)
         // console.log(result)
@@ -235,7 +240,7 @@ export default class RER {
         console.log(newSchedule[i])
         if (self.content[i].message != newSchedule[i].message) {
           console.log('LE MESSAGE A CHANGE')
-          self.fill(i, newSchedule[i].code, newSchedule[i].message, false)
+          self.fill(self.lastRow + i - 5, newSchedule[i].code, newSchedule[i].message, false)
           self.content[i] = newSchedule[i]
         }
       } else {
