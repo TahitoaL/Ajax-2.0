@@ -141,7 +141,7 @@ export default class RER {
     }, 2000)
   }
 
-  fill (line, mission, message) {
+  fill (line, mission, message, save = true) {
     let tr = document.querySelector('#line-number-' + line)
     let code = tr.querySelector('td.code')
     code.innerHTML = '<span><a class="mission" href="https://toal.000webhostapp.com/transports/contents/mission.php?mission=' + mission + '">' + mission + '</a></span>'
@@ -149,10 +149,12 @@ export default class RER {
     direction.innerHTML = this.getTerminus(mission)
     let mes = tr.querySelector('td.message')
     mes.innerHTML = this.message(message)
-    this.content.push({
-      code: mission,
-      message: message
-    })
+    if (save == true) {
+      this.content.push({
+        code: mission,
+        message: message
+      })
+    }
   }
 
   firstFill (schedules) {
@@ -208,24 +210,38 @@ export default class RER {
     if (this.url.length > 0) {
       getTimes(this.url).then(function (result) {
         let response = JSON.parse(result)
-        console.log(response.result.schedules[0])
         let hasChanged = compare(response.result.schedules[0], self.content[self.first])
         if (hasChanged) {
           self.newLine()
           self.fill(self.lastRow - 1, response.result.schedules[4].code, response.result.schedules[4].message)
           self.first++
+          self.content.shift()
         }
-        console.log('OKKKK')
+        self.update(response.result.schedules)
         // console.log(result)
       })
       // this.mission()
     } else {
-      console.log('url vide')
     }
   }
 
-  update () {
-    console.log('update...')
+  update (newSchedule) {
+    let firstRow = this.lastRow - 5
+    console.log(self.content)
+    console.log(newSchedule)
+    for (let i = 0; i < 5; i++) {
+      if (self.content[i].code == newSchedule[i].code) {
+        console.log(self.content[i])
+        console.log(newSchedule[i])
+        if (self.content[i].message != newSchedule[i].message) {
+          console.log('LE MESSAGE A CHANGE')
+          self.fill(i, newSchedule[i].code, newSchedule[i].message, false)
+          self.content[i] = newSchedule[i]
+        }
+      } else {
+        console.log('code erreur')
+      }
+    }
   }
 
 }
