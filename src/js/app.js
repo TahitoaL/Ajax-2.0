@@ -59,7 +59,8 @@ var getSchedules = async function (sens) {
   RerA.url = response.rer
   response.rer.forEach(async function (url) {
     let schedule = await get(url)
-    RerA.create(schedule)
+    // RerA.create(schedule)
+    RerA.createTable()
     createNotification('success', 'Les requetes ont été effectuées avec succès')
 
   })
@@ -76,12 +77,12 @@ var getSchedules = async function (sens) {
 }
 
 getSchedules('0').then(function (results) {
-  console.log('results')
-  setInterval(function () {
-    if (RerA.created) {
-      RerA.refresh()
-    }
-  }, 10000)
+  // console.log('results')
+  // setInterval(function () {
+  //   if (RerA.created) {
+  //     RerA.refresh()
+  //   }
+  // }, 30000)
 })
 
 document.querySelectorAll('button').forEach(function (button) {
