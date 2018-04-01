@@ -73,6 +73,7 @@ export default class RER {
   constructor (name) {
     this.name = name
     this.url = ''
+    this.html = ''
     this.tbody = ''
     this.content = []
     this.created = false
@@ -99,24 +100,44 @@ export default class RER {
   }
 
   createTable () {
-    let horaire = newElement('div', ['horaire'], "", document.getElementById('container'))
+    var horaire = newElement('div', ['horaire'], "", document.getElementById('container'))
     let table__header = newElement('div', ['table__header'], "<img class='table__header__img' src='https://toal.000webhostapp.com/src/img/reragenrvb.svg' alt='RER A'><span class='table__header__dir'>Paris / Boissy-St-Léger / Marne-la-Vallée</span>", horaire)
-    var tbody = newElement('tbody', ['a'], '', horaire)
+    let table__body = newElement('div',  ['table__body'], '', horaire)
+    let table__container = newElement('div', ['table__container'], '', table__body)
+    var tbody = newElement('tbody', ['a'], '', table__container)
     this.tbody = tbody
     for (let i = 0; i < 5; i++) {
       this.createLine()
     }
-    this.fill(1, 'TAXI', "Train à quai")
+    this.created = true
+    this.html = horaire
   }
 
   createLine () {
-    let tr = newElement ('tr', ['a'], '', this.tbody)
+    let classes = ['a']
+    if (this.lastRow % 2 == 0) {
+      classes.push('pair')
+    }
+    let tr = newElement ('tr', classes, '', this.tbody)
     tr.setAttribute('data-line-number', this.lastRow)
     tr.id = 'line-number-' + this.lastRow
     this.lastRow++
     let code = newElement('td', ['code'], '<span><a class="mission" href="https://toal.000webhostapp.com/transports/contents/mission.php?mission="UBER">UBER</a></span>', tr)
     let direction = newElement('td', ['direction'], this.getTerminus('UBER'), tr)
     let message = newElement('td', ['message'], '', tr)
+  }
+
+  newLine () {
+    this.createLine()
+    var table = this.html.querySelector('.table__container')
+    table.classList.add('slide')
+    setTimeout(function () {
+      let numDel = parseInt(self.lastRow) - 6
+      let idDel = '#line-number-' + numDel
+      let toDel = document.querySelector(idDel)
+      self.tbody.removeChild(toDel)
+      table.classList.remove('slide')
+    }, 2000)
   }
 
   fill (line, mission, message) {
@@ -126,7 +147,6 @@ export default class RER {
     let direction = tr.querySelector('td.direction')
     direction.innerHTML = this.getTerminus(mission)
     let mes = tr.querySelector('td.message')
-    console.log(message)
     mes.innerHTML = this.message(message)
   }
 
@@ -147,7 +167,6 @@ export default class RER {
 
   getTerminus (code) {
     let firstChar = code.charAt(0)
-    console.log(terminus)
     let lastStation = terminus[firstChar]
     return lastStation
   }

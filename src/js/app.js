@@ -77,12 +77,18 @@ var getSchedules = async function (sens) {
 }
 
 getSchedules('0').then(function (results) {
-  // console.log('results')
-  // setInterval(function () {
-  //   if (RerA.created) {
-  //     RerA.refresh()
-  //   }
-  // }, 30000)
+  console.log('results')
+  setInterval(function () {
+    if (RerA.created) {
+      // RerA.refresh()
+      RerA.newLine()
+      console.log(RerA.lastRow)
+      if (RerA.lastRow % 2 == 0){
+        RerA.fill(RerA.lastRow, 'TAXI', 'Train à quai')
+      }
+      console.log('NOUVEAU')
+    }
+  }, 10000)
 })
 
 document.querySelectorAll('button').forEach(function (button) {

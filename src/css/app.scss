@@ -2,14 +2,14 @@
 * GENERAL
 */
 
-body{
-	padding: 0;
-	margin: 0;
-	font-family: "Roboto", Helvetica, Arial, sans-serif;
-	font-size: 13px;
-	line-height: 1.846;
-	color: #555555;
- 	background-color: #ffffff;
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.846;
+  color: #555555;
+  background-color: #ffffff;
 }
 
 /*
@@ -99,7 +99,7 @@ body{
   font-size: 16px;
 }
 
-.notification__close a{
+.notification__close a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -109,7 +109,7 @@ body{
   top: 0;
   left: 0;
   right: 0;
-  content: '';
+  content: "";
   background-color: rgba(255, 255, 255, 0.6);
   height: 3px;
   position: absolute;
@@ -122,279 +122,329 @@ body{
 // }
 
 @keyframes widthClose {
-  0%{ width: 100%;}
-  10%{ width: 100%;}
-  90%{ width: 0%;}
-  100%{ width: 0%;}
+  0% {
+    width: 100%;
+  }
+  10% {
+    width: 100%;
+  }
+  90% {
+    width: 0%;
+  }
+  100% {
+    width: 0%;
+  }
 }
 
 @keyframes animNotif {
-  0% {transform: translateX(75px); opacity: 0;}
-  40% {transform: translateX(0px); opacity: 1;}
-  60% {transform: translateX(0px); opacity: 1;}
-  100% {transform: translateX(75px); opacity: 0;}
+  0% {
+    transform: translateX(75px);
+    opacity: 0;
+  }
+  40% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(75px);
+    opacity: 0;
+  }
 }
 
 /*
 * HORAIRES
 */
 
-.horaire table, .horaire_bus table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
+.table__body {
+  overflow: hidden;
+}
+
+.table__container {
+  position: relative;
+  top: 0;
+}
+
+.slide {
+  animation: slide 2s;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-56.6px);
+  }
+}
+
+.horaire table,
+.horaire_bus table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .horaire tbody {
-position: relative;
-display: block;
-overflow: hidden;
-height: 283px;
-// transform: translateY(-56.6px);
-z-index: 0;
+  position: relative;
+  display: block;
+  overflow: visible;
+  height: 283px;
+  // transform: translateY(-56.6px);
+  z-index: 0;
 }
 
-.horaire td, .horaire th, .horaire_bus td, .horaire_bus th {
-height: 41px;
-line-height: 41px;
-	/*border-top: : 3px solid #bbbbbb;*/
-	text-align: center;
-	padding: 8px;
+.horaire td,
+.horaire th,
+.horaire_bus td,
+.horaire_bus th {
+  height: 41px;
+  line-height: 41px;
+  /*border-top: : 3px solid #bbbbbb;*/
+  text-align: center;
+  padding: 8px;
 }
 
 .horaire tr {
-background-color: rgba(232, 179, 179, 0.72);
-border-bottom:  3px solid #bbbbbb;
+  background-color: #fff;
+  border-bottom: 3px solid #bbbbbb;
 }
 
-.horaire tr:nth-child(even) {
-background-color: #FFF;
+tr .pair {
+  background-color: rgba(232, 179, 179, 0.72);
 }
 
-.bus__tr{
-background-color: #FFF;
-border-bottom:  3px solid #bbbbbb;
+// .horaire tr:nth-child(even) {
+// background-color: #FFF;
+// }
+
+.bus__tr {
+  background-color: #fff;
+  border-bottom: 3px solid #bbbbbb;
 }
 
-.horaire tr:last-child, .horaire_bus tr:last-child{
-border-bottom: none;
+.horaire tr:last-child,
+.horaire_bus tr:last-child {
+  border-bottom: none;
 }
 
 .left {
-text-align: left;
-width: 100%;
-position: sticky;
+  text-align: left;
+  width: 100%;
+  position: sticky;
 }
 
 .time {
-position: relative;
-top: 2.5px;
-bottom: 2.5px;
-background-color: #000;
-height: 35px;
-line-height: 35px;
-padding: 5px;
-font-weight: bold;
-color: #e3c72f;
-border-radius: 3px;
-padding: 2px;
-text-align: center;
-margin-left: 15px;
-width: 85px;
-font-size: 22px;
+  position: relative;
+  top: 2.5px;
+  bottom: 2.5px;
+  background-color: #000;
+  height: 35px;
+  line-height: 35px;
+  padding: 5px;
+  font-weight: bold;
+  color: #e3c72f;
+  border-radius: 3px;
+  padding: 2px;
+  text-align: center;
+  margin-left: 15px;
+  width: 85px;
+  font-size: 22px;
 }
 
-.code{
-text-align: center;
-width: 120px;
-font-family: "Lucida Console", Monaco, monospace;
-font-size: 20px;
+.code {
+  text-align: center;
+  width: 120px;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 20px;
 }
 
-.code span{
-border-radius: 5px;
-border: 1px solid #222;
-position: relative;
-text-align: center;
-padding: 4px 7px;
-text-decoration: none;
-color: #000;
+.code span {
+  border-radius: 5px;
+  border: 1px solid #222;
+  position: relative;
+  text-align: center;
+  padding: 4px 7px;
+  text-decoration: none;
+  color: #000;
 }
 
-.code span a{
-text-decoration: none;
-color: inherit;
+.code span a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.direction{
-width: 400px;
-font-weight: bold;
-color: #2c63a6;
-text-align: left;
-font-size: 23px;
+.direction {
+  width: 400px;
+  font-weight: bold;
+  color: #2c63a6;
+  text-align: left;
+  font-size: 23px;
 }
 
-.bus__destination{
-position: relative;
-width: 400px;
-font-weight: bold;
-color: #2c63a6;
-text-align: left;
-left: 60px;
-font-size: 23px;
+.bus__destination {
+  position: relative;
+  width: 400px;
+  font-weight: bold;
+  color: #2c63a6;
+  text-align: left;
+  left: 60px;
+  font-size: 23px;
 }
 
-.message{
-width: 42%;
-font-size: 25px;
-color: #FFF;
-position: relative;
+.message {
+  width: 42%;
+  font-size: 25px;
+  color: #fff;
+  position: relative;
 }
 
-.message__content{
-position: absolute;
-top: 0;
-right: 0;
-left: 0;
-bottom: 4px;
-width: 100%;
-background-color: #444444;
-border-radius: 10px 0 0 10px;
-box-shadow: -2px 2px 3px #666;
+.message__content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  background-color: #444444;
+  border-radius: 10px 0 0 10px;
+  box-shadow: -2px 2px 3px #666;
 }
 
-.bus__message__content{
-background-color: #000;
-color: #e3c72f;
-font-size: 25px;
-font-weight: bold;
-padding: 8px;
-border-radius: 7px;
+.bus__message__content {
+  background-color: #000;
+  color: #e3c72f;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 7px;
 }
 
-.message__time{
-height: 52px;
-line-height: 52px;
-position: absolute;
-left: 0;
-top: 0;
-bottom: 0;
-background-color: #000;
-border-radius: 10px 0 0 10px;
-padding: 0 8px;
-font-weight: bold;
-color: #e3c72f;
-display: inline-block;
+.message__time {
+  height: 52px;
+  line-height: 52px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #000;
+  border-radius: 10px 0 0 10px;
+  padding: 0 8px;
+  font-weight: bold;
+  color: #e3c72f;
+  display: inline-block;
 }
 
-.voie{
-height: 52px;
-line-height: 52px;
-position: absolute;
-text-align: center;
-display: inline-block;
-font-weight: bold;
-color: #FFF;
+.voie {
+  height: 52px;
+  line-height: 52px;
+  position: absolute;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+  color: #fff;
 }
 
-.horaire{
-border: 2px solid #444444;
-border-radius: 10px;
-z-index: 99999;
-overflow: hidden;
+.horaire {
+  border: 2px solid #444444;
+  border-radius: 10px;
+  z-index: 99999;
+  overflow: visible;
 }
 
-.horaire_bus{
-border: 2px solid #444444;
-border-radius: 10px;
+.horaire_bus {
+  border: 2px solid #444444;
+  border-radius: 10px;
 }
 
-.table__header{
-border-bottom: 5px solid #F00;
-box-shadow: 0 4px 4px #000;
-z-index: 999;
-height: 100px;
-line-height: 100px;
-z-index: 999;
-overflow: hidden;
+.table__header {
+  border-bottom: 5px solid #f00;
+  box-shadow: 0 4px 4px #000;
+  z-index: 999;
+  height: 100px;
+  line-height: 100px;
+  z-index: 999;
+  overflow: hidden;
 }
 
-.bus52__table__header{
-border-bottom: 5px solid #82C8E6;
-box-shadow: 0 4px 4px #000;
-z-index: 999;
-height: 100px;
-line-height: 100px;
-overflow: hidden;
+.bus52__table__header {
+  border-bottom: 5px solid #82c8e6;
+  box-shadow: 0 4px 4px #000;
+  z-index: 999;
+  height: 100px;
+  line-height: 100px;
+  overflow: hidden;
 }
 
-.bus73__table__header{
-border-bottom: 5px solid #6E491E;
-box-shadow: 0 4px 4px #000;
-z-index: 999;
-height: 100px;
-line-height: 100px;
-overflow: hidden;
+.bus73__table__header {
+  border-bottom: 5px solid #6e491e;
+  box-shadow: 0 4px 4px #000;
+  z-index: 999;
+  height: 100px;
+  line-height: 100px;
+  overflow: hidden;
 }
 
-.metro9__table__header{
-border-bottom: 5px solid #D2D200;
-box-shadow: 0 4px 4px #000;
-z-index: 999;
-height: 100px;
-line-height: 100px;
-overflow: hidden;
+.metro9__table__header {
+  border-bottom: 5px solid #d2d200;
+  box-shadow: 0 4px 4px #000;
+  z-index: 999;
+  height: 100px;
+  line-height: 100px;
+  overflow: hidden;
 }
 
-.metro6__table__header{
-border-bottom: 5px solid #82DC73;
-box-shadow: 0 4px 4px #000;
-z-index: 999;
-height: 100px;
-line-height: 100px;
-overflow: hidden;
+.metro6__table__header {
+  border-bottom: 5px solid #82dc73;
+  box-shadow: 0 4px 4px #000;
+  z-index: 999;
+  height: 100px;
+  line-height: 100px;
+  overflow: hidden;
 }
 
-.table__header__dir{
-position: relative;
-color: #2c63a6;
-display: inline-block;
-font-size: 30px;
-font-weight: bold;
-left: 20px;
-text-shadow: 0 0 4px #888;
+.table__header__dir {
+  position: relative;
+  color: #2c63a6;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
+  left: 20px;
+  text-shadow: 0 0 4px #888;
 }
 
-.bus__table__header__dir{
-position: relative;
-color: #2c63a6;
-display: inline-block;
-font-size: 30px;
-font-weight: bold;
-left: 30px;
-text-shadow: 0 0 4px #888;
+.bus__table__header__dir {
+  position: relative;
+  color: #2c63a6;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
+  left: 30px;
+  text-shadow: 0 0 4px #888;
 }
 
-.table__header__img{
-position: relative;
-display: inline-block;
-height: 80px;
-width: 80px;
-top: 10px;
-bottom: 10px;
-left: 15px;
+.table__header__img {
+  position: relative;
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  top: 10px;
+  bottom: 10px;
+  left: 15px;
 }
 
-.bus__table__header__img{
-position: relative;
-display: inline-block;
-height: 70px;
-top: 15px;
-bottom: 15px;
-left: 15px;
-border-radius: 2px;
+.bus__table__header__img {
+  position: relative;
+  display: inline-block;
+  height: 70px;
+  top: 15px;
+  bottom: 15px;
+  left: 15px;
+  border-radius: 2px;
 }
-
 
 /*
 * SLIDER
@@ -406,8 +456,9 @@ border-radius: 2px;
 
 @keyframes slideTop {
   0% {
-    transform: translateY()(0);
-  } to {
+    transform: translateY() (0);
+  }
+  to {
     transform: translateY(-56.6px);
   }
 }
