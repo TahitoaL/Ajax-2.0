@@ -209,17 +209,16 @@ body {
 }
 
 .horaire tr {
-  background-color: #fff;
   border-bottom: 3px solid #bbbbbb;
 }
 
-tr .pair {
-  background-color: rgba(232, 179, 179, 0.72);
+.horaire .pair {
+  background-color: rgb(239, 202, 202);
 }
 
-// .horaire tr:nth-child(even) {
-// background-color: #FFF;
-// }
+.horaire:not(.pair) {
+  background-color: #FFF;
+}
 
 .bus__tr {
   background-color: #fff;
@@ -362,7 +361,7 @@ tr .pair {
 
 .table__header {
   border-bottom: 5px solid #f00;
-  box-shadow: 0 4px 4px #000;
+  box-shadow: 0 4px 4px #CCC;
   z-index: 999;
   height: 100px;
   line-height: 100px;

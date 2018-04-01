@@ -50,7 +50,7 @@ var getUris = async function (sens) {
       times.metro.push('https://toal.000webhostapp.com/transports/contents/horaire_ajax_metro.php?ligne=' + horaire.ligne + '&station=' + horaire.station + '&sens=' + horaire.sens)
     }
   })
-  console.log('fin de la création')
+  console.log('fin de la création des urls')
   return times
 }
 
@@ -58,11 +58,11 @@ var getSchedules = async function (sens) {
   let response = await getUris(sens)
   RerA.url = response.rer
   response.rer.forEach(async function (url) {
-    let schedule = await get(url)
-    // RerA.create(schedule)
+    let req = await get(url)
+    let schedules = JSON.parse(req)
     RerA.createTable()
+    RerA.firstFill(schedules.result.schedules)
     createNotification('success', 'Les requetes ont été effectuées avec succès')
-
   })
   // response.bus.forEach(async function (url) {
   //   let schedule = await get(url)
@@ -78,17 +78,24 @@ var getSchedules = async function (sens) {
 
 getSchedules('0').then(function (results) {
   console.log('results')
-  setInterval(function () {
-    if (RerA.created) {
-      // RerA.refresh()
-      RerA.newLine()
-      console.log(RerA.lastRow)
-      if (RerA.lastRow % 2 == 0){
-        RerA.fill(RerA.lastRow, 'TAXI', 'Train à quai')
-      }
-      console.log('NOUVEAU')
-    }
-  }, 10000)
+  console.log(RerA)
+  // if (RerA.created == true) {
+    console.log('Lancement de la boucle')
+    setInterval(function () {
+      console.log('Vérification de nouveaux trains')
+      RerA.refresh()
+    }, 15000)
+  // }
+  // setInterval(function () {
+  //   if (RerA.created) {
+  //     RerA.refresh()
+  //     RerA.newLine()
+  //     console.log(RerA.lastRow)
+  //     if (RerA.lastRow % 2 == 0){
+  //       // RerA.fill(RerA.lastRow - 1, 'TAXI', '17:42 Voie A')
+  //     }
+  //   }
+  // }, 10000)
 })
 
 document.querySelectorAll('button').forEach(function (button) {

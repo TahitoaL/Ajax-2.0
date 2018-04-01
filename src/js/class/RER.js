@@ -38,8 +38,10 @@ let getTimes = async function (url) {
 let compare = function (newContent, oldContent) {
   if (newContent.code != oldContent.code) {
     console.log('Changement détecté')
+    return true
   } else {
     console.log('Aucun changement détecté')
+    return false
   }
 }
 
@@ -109,12 +111,11 @@ export default class RER {
     for (let i = 0; i < 5; i++) {
       this.createLine()
     }
-    this.created = true
     this.html = horaire
   }
 
   createLine () {
-    let classes = ['a']
+    let classes = []
     if (this.lastRow % 2 == 0) {
       classes.push('pair')
     }
@@ -143,12 +144,28 @@ export default class RER {
   fill (line, mission, message) {
     let tr = document.querySelector('#line-number-' + line)
     let code = tr.querySelector('td.code')
-    code.innerHTML = '<span><a class="mission" href="https://toal.000webhostapp.com/transports/contents/mission.php?mission="' + mission + '">' + mission + '</a></span>'
+    code.innerHTML = '<span><a class="mission" href="https://toal.000webhostapp.com/transports/contents/mission.php?mission=' + mission + '">' + mission + '</a></span>'
     let direction = tr.querySelector('td.direction')
     direction.innerHTML = this.getTerminus(mission)
     let mes = tr.querySelector('td.message')
     mes.innerHTML = this.message(message)
+    this.content.push({
+      code: mission,
+      message: message
+    })
   }
+
+  firstFill (schedules) {
+    var schedI = 0
+    schedules.forEach(function (schedule) {
+      if (schedI < 5) {
+        self.fill(schedI, schedule.code, schedule.message)
+        schedI++
+      }
+    })
+
+    this.created = true
+  } 
 
   create (jsonFile) {
     var times = JSON.parse(jsonFile)
@@ -192,7 +209,12 @@ export default class RER {
       getTimes(this.url).then(function (result) {
         let response = JSON.parse(result)
         console.log(response.result.schedules[0])
-        compare(response.result.schedules[0], self.content[self.first])
+        let hasChanged = compare(response.result.schedules[0], self.content[self.first])
+        if (hasChanged) {
+          self.newLine()
+          self.fill(self.lastRow - 1, response.result.schedules[4].code, response.result.schedules[4].message)
+          self.first++
+        }
         console.log('OKKKK')
         // console.log(result)
       })

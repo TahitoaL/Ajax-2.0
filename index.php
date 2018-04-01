@@ -1,5 +1,5 @@
 <?php $filesNames = get_object_vars(json_decode(file_get_contents('./dist/manifest.json')));
- ?>
+?>
  <!DOCTYPE html>
  <html>
  	<head>
@@ -8,7 +8,7 @@
  		<meta name="theme-color" content="#2196F3">
  		<meta name="msapplication-navbutton-color" content="#2196F3">
  		<meta name="apple-mobile-web-app-status-bar-style" content="#2196F3">
-    <link rel="stylesheet" href="<?= $filesNames["app.css"] ?>">
+    <link rel="stylesheet" href="<?=$filesNames["app.css"]?>">
  	</head>
  	<body>
  		<header class="header">
@@ -21,12 +21,12 @@
  			</nav>
  		</header>
  		<div class="container" id="container">
-      <button class="test" data-notification-type="success">Valider</button><br>
-      <button class="test" data-notification-type="error">Refuser</button><br>
-      <button class="test" data-notification-type="info" data-notification-text="Informations diverses">Informer</button><br>
-      <button class="test" data-notification-type="warning" data-notification-text="Problème sur la ligne 9">Attention</button><br>
-      <div id="result"></div>
-    </div class="container">
-  </body>
-  <script type="text/javascript" src="<?= $filesNames["app.js"] ?>"></script>
+			<button class="test" data-notification-type="success">Valider</button><br>
+			<button class="test" data-notification-type="error">Refuser</button><br>
+			<button class="test" data-notification-type="info" data-notification-text="Informations diverses">Informer</button><br>
+			<button class="test" data-notification-type="warning" data-notification-text="Problème sur la ligne 9">Attention</button><br>
+			<div id="result"></div>
+		</div class="container">
+	</body>
+	<script type="text/javascript" src="<?=$filesNames["app.js"]?>"></script>
 </html>
