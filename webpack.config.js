@@ -37,7 +37,7 @@ let config = {
   resolve: {
     extensions: ['.js']
   },
-  devtool: "cheap-module-eval-source-map",
+  // devtool: "cheap-module-eval-source-map",
   module: {
     rules: [
       {

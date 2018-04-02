@@ -12,6 +12,12 @@ body {
   background-color: #ffffff;
 }
 
+.container {
+  margin: 0 10%;
+  max-width: 944px;
+  min-width: 685px;
+}
+
 /*
 * NOTIFICATIONS
 */
@@ -161,6 +167,7 @@ body {
 
 .table__body {
   overflow: hidden;
+  border-radius: 0 0 10px 10px;
 }
 
 .table__container {

@@ -76,7 +76,7 @@ var getSchedules = async function (sens) {
   return response
 }
 
-getSchedules('0').then(function (results) {
+getSchedules('1').then(function (results) {
   console.log('results')
   console.log(RerA)
   // if (RerA.created == true) {
@@ -84,7 +84,7 @@ getSchedules('0').then(function (results) {
     setInterval(function () {
       console.log('Vérification de nouveaux trains')
       RerA.refresh()
-    }, 15000)
+    }, 30000)
   // }
   // setInterval(function () {
   //   if (RerA.created) {

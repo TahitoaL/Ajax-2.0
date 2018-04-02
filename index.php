@@ -3,12 +3,12 @@
  <!DOCTYPE html>
  <html>
  	<head>
- 		<title>Toa | Accueil</title>
  		<meta charset="UTF-8">
  		<meta name="theme-color" content="#2196F3">
  		<meta name="msapplication-navbutton-color" content="#2196F3">
  		<meta name="apple-mobile-web-app-status-bar-style" content="#2196F3">
-    <link rel="stylesheet" href="<?=$filesNames["app.css"]?>">
+		<link rel="stylesheet" href=".<?=$filesNames["app.css"]?>">
+		<title>Toa | Horaires Transports</title>
  	</head>
  	<body>
  		<header class="header">
@@ -28,5 +28,5 @@
 			<div id="result"></div>
 		</div class="container">
 	</body>
-	<script type="text/javascript" src="<?=$filesNames["app.js"]?>"></script>
+	<script type="text/javascript" src=".<?=$filesNames["app.js"]?>"></script>
 </html>
