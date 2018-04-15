@@ -6,11 +6,6 @@ import css from '../css/app.scss'
 var RerA = new RER ('RerA')
 console.log(RerA)
 
-// console.log(RerA.message('17:04 Voie A'))
-
-// console.log(RerA.create('{ "result": { "schedules": [ { "code": "NEMO", "message": "21:47 Voie 1", "destination": "Boissy-Saint-Leger" }, { "code": "QURE", "message": "21:53 Voie 1", "destination": "Marne-la-Vallee Chessy" }, { "code": "NEMO", "message": "22:00 Voie 1", "destination": "Boissy-Saint-Leger" }, { "code": "OPUS", "message": "22:08 Voie 1", "destination": "Torcy" }, { "code": "NEMO", "message": "22:16 Voie 1", "destination": "Boissy-Saint-Leger" }, { "code": "QURE", "message": "22:23 Voie 1", "destination": "Marne-la-Vallee Chessy" } ] }, "_metadata": { "call": "GET /schedules/rers/A/la+defense+%28grande+arche%29/R", "date": "2018-03-25T21:46:21+02:00", "version": 3 } }'))
-
-
 var get = function(url) {
   return new Promise(function(resolve, reject){
     var xhr = new XMLHttpRequest()
@@ -77,25 +72,7 @@ var getSchedules = async function (sens) {
 }
 
 getSchedules('0').then(function (results) {
-  console.log('results')
-  console.log(RerA)
-  // if (RerA.created == true) {
-    console.log('Lancement de la boucle')
-    setInterval(function () {
-      console.log('Vérification de nouveaux trains')
-      RerA.refresh()
-    }, 15000)
-  // }
-  // setInterval(function () {
-  //   if (RerA.created) {
-  //     RerA.refresh()
-  //     RerA.newLine()
-  //     console.log(RerA.lastRow)
-  //     if (RerA.lastRow % 2 == 0){
-  //       // RerA.fill(RerA.lastRow - 1, 'TAXI', '17:42 Voie A')
-  //     }
-  //   }
-  // }, 10000)
+  
 })
 
 document.querySelectorAll('button').forEach(function (button) {

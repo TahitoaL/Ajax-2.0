@@ -168,6 +168,7 @@ export default class RER {
     })
 
     this.created = true
+    this.autoRefresh()
   } 
 
   create (jsonFile) {
@@ -228,6 +229,13 @@ export default class RER {
       // this.mission()
     } else {
     }
+  }
+
+  autoRefresh () {
+    setInterval(function () {
+      console.log('Vérification de nouveaux trains')
+      self.refresh()
+    }, 15000)
   }
 
   update (newSchedule) {
