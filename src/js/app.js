@@ -1,5 +1,6 @@
 import {createNotification} from './notification.js'
 import RER from './class/RER'
+import METRO from './class/METRO'
 import css from '../css/app.scss'
 
 
