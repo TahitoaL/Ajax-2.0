@@ -88,15 +88,15 @@ export default class RER {
   message (message) {
     let exp = message.split(':')
     let exp2 = message.split(' ')
-    if (exp[0].length == 2 && exp2[0].length == 5 && exp2[1].length > 0) {
+    if (exp[0].length == 2 && exp2[0].length == 5 && exp2[1] != undefined) {
       var response = "<span class='message__content'><span class='message__time'>" + exp2[0] + "</span><span class='voie'>" // On a une date et un message
       for (var i = 1; i < exp2.length; i++) {
         response += exp2[i] + ' '
       }
       response += "</span></span>"
-    } else if (exp2[1] == undefined) {
+    } else if (exp2[1] === undefined) {
       response = "<span class='message__content'><span class='message__time'> " + message + "</span><span class='voie'></span></span>" // On a une date
-    } else if (exp[1] == undefined) {
+    } else if (exp[1] === undefined) {
       response = "<span class='message__content'><span class='voie' style='position: relative;'>"+ message+ "</span></span>";
     }
     return response

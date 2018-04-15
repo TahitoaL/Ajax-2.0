@@ -71,7 +71,7 @@ var getSchedules = async function (sens) {
   return response
 }
 
-getSchedules('0').then(function (results) {
+getSchedules('1').then(function (results) {
   
 })
 
