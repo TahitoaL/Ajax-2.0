@@ -11,5 +11,18 @@ let newElement = function (type, classes, content, parent) {
   }
 
 export default class METRO {
-    
+
+    constructor (name, line_id, station, sens, direction = NULL) {
+        this.name = name
+        this.id = line_id
+        this.station = station
+        this.sens = sens
+        if (direction != NULL) {
+            this.direction == direction
+        }
+        this.content = []
+        this.lastRequest = []
+        self = this
+    }
+
 }
