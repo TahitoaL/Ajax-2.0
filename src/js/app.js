@@ -72,9 +72,13 @@ var getSchedules = async function (sens) {
   return response
 }
 
-getSchedules('1').then(function (results) {
+let L1 = new METRO ('Ligne_1', '100110001:1', 'StopPoint:59232', '1')
+
+L1.create()
+
+// getSchedules('1').then(function (results) {
   
-})
+// })
 
 document.querySelectorAll('button').forEach(function (button) {
   button.addEventListener('click', function (e) {
