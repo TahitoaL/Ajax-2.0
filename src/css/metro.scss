@@ -1,0 +1,151 @@
+.metro {
+    width: 100%;
+    border: 2px solid #000;
+    border-radius: 10px;
+
+    & .metro__header {
+        display: block;
+        height: 100px;
+        line-height: 100px;
+        width: 100%;
+        top: 0;
+        right: 0;
+        left: 0;
+        border-bottom: 5px solid #D2D200;
+        overflow: hidden;
+    
+        & span {
+            display: inline-block;
+        }
+    
+        & .metro__header__icon {
+            position: relative;
+            padding: 0;
+            margin-right: 30px;
+            width: 210px;
+            height: 100px;
+            line-height: 100px;
+            top: 0;
+            left: 0;
+            bottom: 0;
+    
+            & img {
+                position: relative;
+                padding: 10px;
+                width: 80px;
+                height: 80px;
+                line-height: 80px;
+            }
+        }
+    
+        & .metro__header__station {
+            position: absolute;
+            // margin-left: 20px;
+            height: 100px;
+            line-height: 100px;
+            overflow: hidden;
+            font-size: 40px;
+            font-family: sans-serif;
+            color: #050D9E;
+            font-weight: 700;
+        }
+    }
+    
+    & .metro__body {
+        position: relative;
+        height: 100px;
+        width: 100%;
+        overflow: hidden;
+
+        & .metro__body__dir {
+            position: relative;
+            height: 80px;
+            line-height: 80px;
+            font-size: 30px;
+            color: #050D9E;
+            font-weight: 700;
+            width: calc(50% - 40px);
+            padding:10px 20px;
+            float: left;
+        }
+
+        & .metro__body__schedules {
+            position: absolute;
+            height: 80px;
+            padding: 10px;
+            width: calc(50% - 20px);
+            float: right;
+
+            & .left {
+                width: 300px;
+
+                & .metro__body__schedules__time {
+                    background-color: #000;
+                    display: inline-block;
+                    margin: 15px 5px;
+                    width: 50px;
+                    height: 50px;
+                    line-height: 50px;
+                    color: #FFE273,;
+                    border-radius: 8px;
+                    text-align: center;
+                    font-size: 30px;
+                    font-weight: 700;
+                }
+            }
+
+            & .right {
+                width: 100px;
+                height: 100px;
+                line-height: 100px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                text-align: center;
+
+                & .metro__body__trafic {
+                    background-color: #000;
+                    width: 50px;
+                    height: 50px;
+                    line-height: 50px;
+                    text-align: center;
+                    border-radius: 8px;
+                    display: inline-block;
+                    text-align: center;
+
+                    & .trafic__state {
+                        display: inline-block;
+                        position: relative;
+                        margin: 12px;
+                        width: 26px;
+                        height: 26px;
+                        line-height: 26px;
+                        background-color: rgb(50, 146, 38);
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.blink__time{
+    animation: blink__time 1.5s infinite;
+}
+
+@keyframes blink__time {
+    0% {color: rgba(255, 226, 115, 1);}
+    10% {color: rgba(255, 226, 115, 0.3);}
+    30% {color: rgba(255, 226, 115, 0.3);}
+    40% {color: rgba(255, 226, 115, 1);}
+    100% {color: rgba(255, 226, 115, 1);}
+}

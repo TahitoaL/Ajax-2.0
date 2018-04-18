@@ -52,8 +52,8 @@ export default class METRO {
     create () {
         this.url = 'https://toal.000webhostapp.com/transports/contents/getMetro.php?station=' + this.station + '&line=' + this.id + '&sens=' + this.sens
         this.direction != undefined ? this.url += '&direction=' + this.direction : this.url = this.url
-        getTimes(this.url).then( (result) => {
-            console.log(result)
+        getTimes(this.url).then((result) => {
+            console.log(JSON.parse(result))
         })
     }
 
