@@ -2,6 +2,7 @@
     width: 100%;
     border: 2px solid #000;
     border-radius: 10px;
+    margin-bottom: 50px;
 
     & .metro__header {
         display: block;
@@ -40,14 +41,19 @@
     
         & .metro__header__station {
             position: absolute;
-            // margin-left: 20px;
-            height: 100px;
-            line-height: 100px;
+            margin-left: 30px;
+            margin: 20px 0;
+            border-radius: 2px;
+            padding: 0 15px;
+            height: 60px;
+            line-height: 60px;
             overflow: hidden;
             font-size: 40px;
             font-family: sans-serif;
-            color: #050D9E;
+            background-color: #050D9E;
+            color: #FFf;
             font-weight: 700;
+            box-shadow: 0 2px 5px #666;
         }
     }
     

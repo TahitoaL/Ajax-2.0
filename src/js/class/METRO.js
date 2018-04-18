@@ -54,6 +54,8 @@ export default class METRO {
         this.direction != undefined ? this.url += '&direction=' + this.direction : this.url = this.url
         getTimes(this.url).then((result) => {
             console.log(JSON.parse(result))
+            newElement('div', ['metro'], '', document.querySelector('.container'))
+            newElement('div', [''])
         })
     }
 
