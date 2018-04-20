@@ -74,8 +74,10 @@ var getSchedules = async function (sens) {
 }
 
 let L1 = new METRO ('Ligne_1', '100110001:1', 'StopPoint:59232', '1')
+let L6 = new METRO ('Ligne_6', '100110006:6', 'StopPoint:59243', '1')
 
 L1.create()
+L6.create()
 
 // getSchedules('1').then(function (results) {
   
