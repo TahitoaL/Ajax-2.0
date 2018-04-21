@@ -1,4 +1,4 @@
-let newElement = function (type, classes, content, parent) {
+let newElement = function (type, classes, content, parent, create = true) {
     let el = document.createElement(type)
     classes.forEach(function (cl) {
       el.classList.add(cl)
@@ -6,7 +6,9 @@ let newElement = function (type, classes, content, parent) {
     if (content != "") {
       el.innerHTML = content
     }
-    parent.appendChild(el)
+    if (create == true){
+      parent.appendChild(el)
+    }
     return el
   }
 
@@ -38,15 +40,15 @@ let getStationInfos = async function (gfts) {
   return res
 }
 
-let getScheduleHTML = function (schedule, parent) {
+let getScheduleHTML = function (schedule, parent, create = true) {
   if (parseInt(schedule) == -1){
-    var elem = newElement('span', ['metro__body__schedules__time'], '0', parent)
+    var elem = newElement('span', ['metro__body__schedules__time'], '0', parent, create == true ? true : false)
   } else if (schedule == "0") {
-    var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '0', parent)
+    var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '0', parent, create == true ? true : false)
   } else if (schedule == '++') {
-    var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '++', parent)
+    var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '++', parent, create == true ? true : false)
   } else {
-    var elem = newElement('span', ['metro__body__schedules__time'], parseInt(schedule), parent)
+    var elem = newElement('span', ['metro__body__schedules__time'], parseInt(schedule), parent, create == true ? true : false)
   }
   return [elem, schedule]
 }
@@ -136,17 +138,6 @@ export default class METRO {
               this.contentElement.push(time[0])
               this.content.push(time[1])
               this.dirNumb = 2
-              // if (parseInt(schedule[1]) == -1){
-              //   var elem = newElement('span', ['metro__body__schedules__time'], '0', left)
-              // } else if (schedule[1] == "0") {
-              //   var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '0', left)
-              // } else if (schedule[1] == '++') {
-              //   var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '++', left)
-              // } else {
-              //   var elem = newElement('span', ['metro__body__schedules__time'], parseInt(schedule[1]), left)
-              // }
-              // this.content.push(schedule[1])
-              // this.contentElement.push(elem)
             }
           })
         })
@@ -176,7 +167,7 @@ export default class METRO {
           if(this.content[i] == '-1'){
 
           } else {
-            let time = getScheduleHTML(result, this.contentElement[i].parentNode)
+            let time = getScheduleHTML(result, this.contentElement[i].parentNode, false)
             this.contentElement[i] = time[0]
             this.content[i] = time[1]
           }
