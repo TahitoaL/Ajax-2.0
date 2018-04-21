@@ -78,8 +78,8 @@ let L6 = new METRO ('Ligne_6', '100110006:6', 'StopPoint:59243', '1')
 let L13 = new METRO ('Ligne_13', '100110013:13', 'StopPoint:59502', '1')
 
 L1.create()
-L6.create()
-L13.create()
+// L6.create()
+// L13.create()
 
 // getSchedules('1').then(function (results) {
   

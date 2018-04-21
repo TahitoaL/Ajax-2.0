@@ -38,6 +38,19 @@ let getStationInfos = async function (gfts) {
   return res
 }
 
+let getScheduleHTML = function (schedule, parent) {
+  if (parseInt(schedule) == -1){
+    var elem = newElement('span', ['metro__body__schedules__time'], '0', parent)
+  } else if (schedule == "0") {
+    var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '0', parent)
+  } else if (schedule == '++') {
+    var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '++', parent)
+  } else {
+    var elem = newElement('span', ['metro__body__schedules__time'], parseInt(schedule), parent)
+  }
+  return [elem, schedule]
+}
+
 let colors = {
   "1": '#FFCD00',
   "2": '#003CA6',
@@ -69,7 +82,9 @@ export default class METRO {
       if (direction != undefined) {
           this.direction == direction
       }
+      this.dirNumb = 0
       this.content = []
+      this.contentElement = []
       this.lastRequest = []
       self = this
   }
@@ -100,15 +115,10 @@ export default class METRO {
         let schedules = newElement('span', ['metro__body__schedules'], '', body)
         let left = newElement('span', ['left'], '', schedules)
         results[0].schedules.forEach((schedule) => {
-          if (parseInt(schedule) == -1){
-            newElement('span', ['metro__body__schedules__time'], '0', left)
-          } else if (schedule == "0") {
-            newElement('span', ['metro__body__schedules__time', 'blink__time'], '0', left)
-          } else if (schedule == '++') {
-            newElement('span', ['metro__body__schedules__time', 'blink__time'], '++', left)
-          } else {
-            newElement('span', ['metro__body__schedules__time'], parseInt(schedule), left)
-          }
+          let time = getScheduleHTML(schedule, left)
+          this.contentElement.push(time[0])
+          this.content.push(time[1])
+          this.dirNumb = 1
         })
       } else if (parseInt(results[0].infos.directionNumb) == 2){
         let i = 0
@@ -122,20 +132,62 @@ export default class METRO {
           let left = newElement('span', ['left'], '', schedules)
           results[0].schedules.forEach((schedule) => {
             if (schedule[0] == direction[0]){
-              if (parseInt(schedule[1]) == -1){
-                newElement('span', ['metro__body__schedules__time'], '0', left)
-              } else if (schedule[1] == "0") {
-                newElement('span', ['metro__body__schedules__time', 'blink__time'], '0', left)
-              } else if (schedule[1] == '++') {
-                newElement('span', ['metro__body__schedules__time', 'blink__time'], '++', left)
-              } else {
-                newElement('span', ['metro__body__schedules__time'], parseInt(schedule[1]), left)
-              }
+              let time = getScheduleHTML(schedule[1], left)
+              this.contentElement.push(time[0])
+              this.content.push(time[1])
+              this.dirNumb = 2
+              // if (parseInt(schedule[1]) == -1){
+              //   var elem = newElement('span', ['metro__body__schedules__time'], '0', left)
+              // } else if (schedule[1] == "0") {
+              //   var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '0', left)
+              // } else if (schedule[1] == '++') {
+              //   var elem = newElement('span', ['metro__body__schedules__time', 'blink__time'], '++', left)
+              // } else {
+              //   var elem = newElement('span', ['metro__body__schedules__time'], parseInt(schedule[1]), left)
+              // }
+              // this.content.push(schedule[1])
+              // this.contentElement.push(elem)
             }
           })
         })
       }
+      console.log(this.content)
+      console.log(this.contentElement)
+      this.autoUpdate()
     })
+  }
+
+  autoUpdate () {
+    setInterval(() => {
+      this.update()
+    }, 10000)
+  }
+
+  update(){
+    console.log('UPDATE')
+    getTimes(this.url).then((results) => {
+      console.log(results)
+      let i = 0
+      JSON.parse(results).schedules.forEach((result) => {
+        console.log(result)
+        console.log(this.content[i])
+        console.log(result != this.content[i] ? 'a changé' : 'n\'a pas changé')
+        if(result != this.content[i] && this.dirNumb == 1){
+          if(this.content[i] == '-1'){
+
+          } else {
+            let time = getScheduleHTML(result, this.contentElement[i].parentNode)
+            this.contentElement[i] = time[0]
+            this.content[i] = time[1]
+          }
+        }
+        i++
+      })
+    })
+  }
+
+  newSchedule () {
+
   }
 
 }

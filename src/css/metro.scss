@@ -5,6 +5,7 @@
     margin-bottom: 50px;
     box-sizing: border-box;
     min-height: 200px;
+    overflow: hidden;
 
     & .metro__header {
         border-style: border-box;
@@ -83,7 +84,6 @@
             height: 80px;
             padding: 10px;
             width: calc(50% - 20px);
-            float: right;
             display: inline-block;
 
             & .left {
