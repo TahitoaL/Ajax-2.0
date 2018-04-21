@@ -84,6 +84,7 @@
             padding: 10px;
             width: calc(50% - 20px);
             float: right;
+            display: inline-block;
 
             & .left {
                 width: 300px;
@@ -137,6 +138,9 @@
             }
         }
     }
+}
+.top-bordered {
+    border-top: 2px solid #000;
 }
 
 .left {

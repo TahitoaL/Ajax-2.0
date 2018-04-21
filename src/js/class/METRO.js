@@ -77,6 +77,7 @@ export default class METRO {
   create () {
     this.url = 'https://toal.000webhostapp.com/transports/contents/getMetro.php?station=' + this.station + '&line=' + this.id + '&sens=' + this.sens
     this.direction != undefined ? this.url += '&direction=' + this.direction : this.url = this.url
+    console.log(this.url)
     Promise.all([getTimes(this.url), getStationInfos(this.station)]).then((values) => {
       let results = []
       values.forEach((value) => {
@@ -88,28 +89,52 @@ export default class METRO {
 
       // HEADER
       let header = newElement('div', ['metro__header'], '', metro)
-      console.log(colors)
-      console.log(line_id)
       header.style.borderBottomColor = colors[String(line_id)]
       newElement('span', ['metro__header__icon'], '<img src="https://toal.000webhostapp.com/src/img/metro.svg" alt="Metro"><img src="https://toal.000webhostapp.com/transports/contents/img/' + line_id + '.svg" alt="Metro ' + line_id + '">', header)
       newElement('span', ['metro__header__station'], results[1].station_name , header)
 
       //BODY
-      let body = newElement('div', ['metro__body'], '', metro)
-      newElement('span', ['metro__body__dir'], results[0].infos.directionName, body)
-      let schedules = newElement('span', ['metro__body__schedules'], '', body)
-      let left = newElement('span', ['left'], '', schedules)
-      results[0].schedules.forEach((schedule) => {
-        if (status == '-1'){
-          newElement('span', ['metro__body__schedules__time'], '0', left)
-        } else if (status == '0') {
-          newElement('span', ['metro__body__schedules__time', 'time__blink'], '0', left)
-        } else if (status == '++') {
-          newElement('span', ['metro__body__schedules__time', 'time__blink'], '++', left)
-        } else {
-          newElement('span', ['metro__body__schedules__time'], schedule, left)
-        }
-      })
+      if (parseInt(results[0].infos.directionNumb) == 1){
+        let body = newElement('div', ['metro__body'], '', metro)
+        newElement('span', ['metro__body__dir'], results[0].infos.directionName, body)
+        let schedules = newElement('span', ['metro__body__schedules'], '', body)
+        let left = newElement('span', ['left'], '', schedules)
+        results[0].schedules.forEach((schedule) => {
+          if (parseInt(schedule) == -1){
+            newElement('span', ['metro__body__schedules__time'], '0', left)
+          } else if (schedule == "0") {
+            newElement('span', ['metro__body__schedules__time', 'blink__time'], '0', left)
+          } else if (schedule == '++') {
+            newElement('span', ['metro__body__schedules__time', 'blink__time'], '++', left)
+          } else {
+            newElement('span', ['metro__body__schedules__time'], parseInt(schedule), left)
+          }
+        })
+      } else if (parseInt(results[0].infos.directionNumb) == 2){
+        let i = 0
+        Object.entries(results[0].infos.directionName).forEach((direction) => {
+          console.log(direction)
+          i++
+          let bodyClasses = i > 1 ? ['metro__body', 'top-bordered'] : ['metro__body']
+          let body = newElement('div', bodyClasses, '', metro)
+          newElement('span', ['metro__body__dir'], direction[1], body)
+          let schedules = newElement('span', ['metro__body__schedules'], '', body)
+          let left = newElement('span', ['left'], '', schedules)
+          results[0].schedules.forEach((schedule) => {
+            if (schedule[0] == direction[0]){
+              if (parseInt(schedule[1]) == -1){
+                newElement('span', ['metro__body__schedules__time'], '0', left)
+              } else if (schedule[1] == "0") {
+                newElement('span', ['metro__body__schedules__time', 'blink__time'], '0', left)
+              } else if (schedule[1] == '++') {
+                newElement('span', ['metro__body__schedules__time', 'blink__time'], '++', left)
+              } else {
+                newElement('span', ['metro__body__schedules__time'], parseInt(schedule[1]), left)
+              }
+            }
+          })
+        })
+      }
     })
   }
 

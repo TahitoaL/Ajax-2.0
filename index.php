@@ -54,8 +54,8 @@
 						</span>
 					</span>
 				</div>
-        </div>
-		</div class="container">
+       		</div>
+		</div>
 	</body>
 	<script type="text/javascript" src="<?=$filesNames["app.js"]?>"></script>
 </html>
