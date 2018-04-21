@@ -54,6 +54,7 @@ var terminus = {
   'G': 'Charles-de-Gaulle - Etoile',
   'H': 'Nation',
   'I': 'Achères-Ville',
+  'J': 'Cergy-Saint-Christophe',
   'M': 'Chatelêt-les-Halles',
   'N': 'Boissy-Saint-Léger',
   'O': 'Torcy',
